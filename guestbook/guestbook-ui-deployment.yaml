@@ -26,6 +26,7 @@ spec:
           privileged: false
           runAsNonRoot: true
           runAsUser: 65535
+      serviceAccount: secret-mounter
       securityContext:
         # Define this on pod level in order to include the Istio
         # containers; otherwise, the pod gets rejected as the
