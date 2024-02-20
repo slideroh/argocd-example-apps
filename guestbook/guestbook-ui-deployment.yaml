@@ -18,3 +18,19 @@ spec:
         name: guestbook-ui
         ports:
         - containerPort: 80
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          runAsNonRoot: true
+          runAsUser: 65535
+      securityContext:
+        # Define this on pod level in order to include the Istio
+        # containers; otherwise, the pod gets rejected as the
+        # Istio containers do not include a seccomp profile.
+        # We don't actually inject the Istio pods here, but for
+        # consistency we do this anyway.
+        seccompProfile:
+          type: RuntimeDefault
